@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 //import org.springframework.security.access.prepost.PostAuthorize;
 //import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -66,7 +68,11 @@ public class PersonneController {
 	@GetMapping("/GetNom/{nom}")
 	public Personne getPersonneByNom(@PathVariable String nom) {
 		Personne p =  personneRepo.findByNom(nom);
-		return p;
+		if(p == null)
+			throw new  CustomerNotFoundException();
+		else {
+			  return p;
+		}
 	}
 	
 //	@GetMapping("/GetNom/{email}")
@@ -88,9 +94,16 @@ public class PersonneController {
 		personneRepo.save(p);
 	}
 	
-	@DeleteMapping("/delete/{nom}")
-	public void deletePersonne(@PathVariable String nom) {
+	@DeleteMapping("/delete1/{nom}")
+	public void deletePersonne11(@PathVariable String nom) {
 		Personne p =  personneRepo.findByNom(nom);
+		System.out.println(p);
+		personneService.deletePersonne(p.getIdPersonne());
+	}
+	
+	@DeleteMapping("/delete/{id}")
+	public void deletePersonne(@PathVariable Long id) {
+		Personne p =  personneRepo.findByIdPersonne(id);
 		System.out.println(p);
 		personneService.deletePersonne(p.getIdPersonne());
 	}

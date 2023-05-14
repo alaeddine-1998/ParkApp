@@ -40,7 +40,7 @@ public class ParkAppApplication  {
 //			personneRepo.AddPersonne(new Personne(Long.valueOf(5), "hamouda", "lamba", "mp@gmail.Com"));
 //			personneRepo.AddPersonne(new Personne(Long.valueOf(6), "aziz", "daoui", "daoui@gmail.Com"));
 //			personneRepo.AddPersonne(new Personne(Long.valueOf(6), "saida", "waca", "waca@gmail.Com"));
-			//delete all user 
+//			//delete all user 
 //			userService.deleteAllRole();
 //			userService.deleteAllUser();
 			

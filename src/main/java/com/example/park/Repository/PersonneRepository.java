@@ -12,6 +12,8 @@ public interface PersonneRepository extends  PagingAndSortingRepository<Personne
 	
 	 public Personne findByNom(String nom);
 	 
+	 public Personne findByIdPersonne(Long nom);
+	 
 	 public Personne findByEmail(String email);
 	 
 	 @Query("select p from Personne p  where p.idPersonne >3")
