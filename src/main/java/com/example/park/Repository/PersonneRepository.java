@@ -12,6 +12,8 @@ public interface PersonneRepository extends  PagingAndSortingRepository<Personne
 	
 	 public Personne findByNom(String nom);
 	 
+//	 public List<Personne> findByNom(String email);
+	 
 	 public Personne findByIdPersonne(Long nom);
 	 
 	 public Personne findByEmail(String email);

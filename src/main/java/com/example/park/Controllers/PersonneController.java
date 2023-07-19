@@ -1,7 +1,12 @@
 package com.example.park.Controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
+import java.util.function.Supplier;
+import java.util.function.ToIntBiFunction;
+import java.util.stream.Collectors;
 
 import javax.websocket.server.PathParam;
 
@@ -25,6 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.park.Repository.PersonneRepository;
 import com.example.park.Service.PersonneService;
 import com.example.park.entities.Personne;
+import com.example.park.entities.Test;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -108,4 +114,52 @@ public class PersonneController {
 		personneService.deletePersonne(p.getIdPersonne());
 	}
 	
+	
+	@GetMapping("/recherche/{nom}")
+	public List<Personne> recherchePersonne(@PathVariable String nom) {
+		List<Personne> list = new ArrayList<>();
+		Personne p =  personneRepo.findByNom(nom);
+		System.out.println(p);
+		list.add(p);
+		if(list.isEmpty())
+			return null;
+		return list;
+	}
+	
+	@GetMapping("/rechercheAllUsingStream")
+	public List<Personne> recherchePersonneUsingStream() {
+		List<Personne> listPersonne =  (List<Personne>) personneRepo.findAll();
+//		listPersonne.stream().forEach(p -> System.out.println(p.toString()));
+		List<Personne> listPersonne3premier = listPersonne.stream().filter(p-> p.getIdPersonne() <=3 ).collect(Collectors.toList());
+		List<String> listdesEmails = listPersonne.stream().map(p-> p.getEmail()).collect(Collectors.toList());
+		 listPersonne.stream().filter(p-> p.getIdPersonne() ==4 ).forEach(p-> p.setNom("Alouaa"));
+		 
+//		 List<Personne> listPersonneVersion2 = listPersonne.stream().map(p -> {
+//			 p.getEmail();
+//		 }).collect(Collectors.toList());
+
+		 //use reference de methode option 1
+		 
+//		 InterfaceFonctionnelle fonction  =  Test::MyTestMethode;
+//		   fonction.doSomething();
+		   
+			 //use reference de methode option 2
+	        Supplier<Integer> result = Test::MyTestMethode;
+	        System.out.println(result.get());
+		 
+	     ToIntBiFunction<String, String> compareToIgnoreCase = String::compareToIgnoreCase;
+	     
+	     Function<String, Integer> parseInt = Integer::parseInt;
+	     System.out.println(parseInt);
+		 
+		 System.out.println(listPersonne);
+		return listPersonne3premier;
+	}
+	
+}
+
+
+@FunctionalInterface
+interface InterfaceFonctionnelle {
+    void doSomething();
 }
