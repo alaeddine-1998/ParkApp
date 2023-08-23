@@ -12,6 +12,11 @@ public interface PersonneRepository extends  PagingAndSortingRepository<Personne
 	
 	 public Personne findByNom(String nom);
 	 
+	 
+	 @Query("select p from Personne p  where p.nom = :nom" )
+	 public List<Personne>  findByListNom(String nom);
+
+	 
 //	 public List<Personne> findByNom(String email);
 	 
 	 public Personne findByIdPersonne(Long nom);
