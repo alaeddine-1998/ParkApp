@@ -1,6 +1,7 @@
 package com.example.park.Controllers;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
@@ -118,12 +119,14 @@ public class PersonneController {
 	@GetMapping("/recherche/{nom}")
 	public List<Personne> recherchePersonne(@PathVariable String nom) {
 		List<Personne> list = new ArrayList<>();
-		Personne p =  personneRepo.findByNom(nom);
+		List<Personne> p =  personneRepo.findByListNom(nom);
+		
+		
 		System.out.println(p);
-		list.add(p);
-		if(list.isEmpty())
-			return null;
-		return list;
+//		list.add(p);
+//		if(list.isEmpty())
+//			return null;
+		return p;
 	}
 	
 	@GetMapping("/rechercheAllUsingStream")
@@ -153,6 +156,10 @@ public class PersonneController {
 	     System.out.println(parseInt);
 		 
 		 System.out.println(listPersonne);
+		 
+	        List<String> names = Arrays.asList("John", "Alice", "Bob", "Eve");
+//	        names.forEach(PersonneController::MyTestMethode);
+
 		return listPersonne3premier;
 	}
 	
