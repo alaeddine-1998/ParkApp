@@ -17,7 +17,7 @@ public class Personne {
 	private Long idPersonne;
 	private String nom;
 	private String prenom;
-	private String email;
+	private String email;   
 	public Long getIdPersonne() {
 		return idPersonne;
 	}
